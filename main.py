@@ -1,3 +1,4 @@
+#untuk pertanyaan yang ke 2 tidak ada metode yang dioverride (digantikan) dari kelas induk ke kelas turunan dalam kode ini
 # Import the required libraries and modules
 import flet as ft
 from flet import *
@@ -59,6 +60,50 @@ class MainContentArea(ft.Container):
             auto_scroll=True,
         )
         self.content = self.chat
+
+#contoh class baru menggunakan metode polimorphisme digabungkan dengan encapsulation
+#dimana class MainContentArea22 ini adalah turunan dari kelas induk nya (MainContentArea)
+
+class NewContentArea(MainContentArea):
+    def __init__(self):
+        super().__init__()
+
+        # Menambahkan atribut baru dengan encapsulation
+        self._new_feature = "This is a new feature."
+
+        # Mengganti jenis konten menjadi ft.TextView
+        self.content = ft.TextView(
+            text="New Content Area",
+            color="green",
+        )
+
+    # Implementasi metode polimorfisme
+    def display_content(self):
+        print(f"Displaying new content: {self.content.text}")
+
+    # Getter untuk atribut baru
+    def get_new_feature(self):
+        return self._new_feature
+
+    # Setter untuk atribut baru
+    def set_new_feature(self, new_feature):
+        self._new_feature = new_feature
+
+
+# Contoh penggunaan
+if __name__ == "__main__":
+    new_content_area = NewContentArea()
+
+    # Mengakses atribut baru dengan encapsulation
+    print(new_content_area.get_new_feature())
+
+    # Mengubah nilai atribut baru dengan encapsulation
+    new_content_area.set_new_feature("Updated feature")
+    print(new_content_area.get_new_feature())
+
+    # Memanggil metode polimorfisme
+    new_content_area.display_content()
+
 
 #Before pushing text to UI - create a class that generates the UI for the actual text prompts
 class CreateMessage(ft.Column):
